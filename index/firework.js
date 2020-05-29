@@ -1,7 +1,7 @@
 function Firework() {
 
-  this.hue = random(255);
-  this.firework = new Particle(random(width),height,this.hue,true);
+  this.hue = [random(60,244),random(60,244),random(60,244)];
+  this.firework = new Particle(random(width),height,1,this.hue,"firework");
   this.exploded = false;
   this.particles = [];
 
@@ -27,7 +27,7 @@ function Firework() {
     for(var i = this.particles.length-1; i >= 0; i--){
       this.particles[i].applyForce(gravity);
       this.particles[i].update();
-      if(this.particles[i].done()) {
+      if(this.particles[i].markForDelete()) {
         this.particles.splice(i,1);
       }
     }
@@ -35,8 +35,13 @@ function Firework() {
   }
 
   this.explode = function() {
+    if(random() <= 0.03){
+      s = random(15,20);
+    }else{
+      s = random(1,10);
+    }
     for(var i = 0; i < 100; i++){
-      var p = new Particle(this.firework.pos.x, this.firework.pos.y,this.hue,false);
+      var p = new Particle(this.firework.pos.x, this.firework.pos.y,s,this.hue,"spark");
       this.particles.push(p);
     }
   }
