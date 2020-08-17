@@ -5,7 +5,6 @@ function Firework() {
   this.exploded = false;
   this.particles = [];
 
-
   this.done = function() {
     if(this.exploded && this.particles.length === 0) {
       return true;
@@ -18,7 +17,6 @@ function Firework() {
     if(!this.exploded) {
       this.firework.applyForce(gravity);
       this.firework.update();
-
       if(this.firework.vel.y >= 1) {
         this.exploded = true;
         this.explode();
@@ -31,7 +29,6 @@ function Firework() {
         this.particles.splice(i,1);
       }
     }
-
   }
 
   this.explode = function() {
