@@ -1,10 +1,12 @@
 class Particle{
   type = "spark";
+  shape = "circle";
   lifespan = 255;
-  constructor(x,y,size,hue,type){
+  constructor(x,y,size,hue,type,shape){
     this.pos = createVector(x,y);
     this.type = type;
     this.size = size;
+    this.shape = shape
     this.burn = random(1,20);
     if(this.type == "firework"){
       this.vel = createVector(0,random(-15,-8));
@@ -31,8 +33,8 @@ class Particle{
   update(){
     if(this.type == "spark"){
       this.vel.mult(0.9);
-      this.b = random(1,5)+this.burn;
-      this.lifespan -= this.b;
+      let b = random(1,5)+this.burn;
+      this.lifespan -= b;
     }
     this.vel.add(this.acc);
     this.pos.add(this.vel);

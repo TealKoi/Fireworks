@@ -2,7 +2,7 @@ var fireworks = [];
 var gravity;
 
 function setup() {
-  createCanvas(400,300);
+  createCanvas(1100,600);
   gravity = createVector(0,0.4);
   stroke(255);
   strokeWeight(4);
@@ -22,3 +22,8 @@ function draw() {;
     }
   }
 }
+
+/*
+Need to look into solution for getting particles to fly out in shapes other than a circle when exploding. Firework and Particle classes should be merged into one class.
+
+*/

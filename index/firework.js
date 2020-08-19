@@ -1,7 +1,13 @@
 function Firework() {
-
   this.hue = [random(60,244),random(60,244),random(60,244)];
-  this.firework = new Particle(random(width),height,1,this.hue,"firework");
+  this.firework = new Particle(
+                        random(width),
+                        height,
+                        1,
+                        this.hue,
+                        "firework",
+                        "circle"
+                        );
   this.exploded = false;
   this.particles = [];
 
@@ -32,13 +38,16 @@ function Firework() {
   }
 
   this.explode = function() {
-    if(random() <= 0.03){
-      s = random(15,20);
-    }else{
-      s = random(1,10);
-    }
+    s = this.gaussianDistributionRandomNumber() * 10;
     for(var i = 0; i < 100; i++){
-      var p = new Particle(this.firework.pos.x, this.firework.pos.y,s,this.hue,"spark");
+      var p = new Particle(
+        this.firework.pos.x,
+        this.firework.pos.y,
+        s,
+        this.hue,
+        "spark",
+        "circle"
+        );
       this.particles.push(p);
     }
   }
@@ -50,5 +59,13 @@ function Firework() {
     for(var i = 0; i < this.particles.length; i++){
       this.particles[i].show();
     }
+  }
+
+  this.gaussianDistributionRandomNumber = function() {
+    let u = 0;
+    let v = 0;
+    while(u === 0) u = Math.random();
+    while(v === 0) v = Math.random();
+    return Math.sqrt(-2.0 * Math.log( u )) * Math.cos(2.0 * Math.PI * v);
   }
 }
